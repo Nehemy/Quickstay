@@ -55,7 +55,7 @@ class Review(models.Model):
 class Enquiry(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="enquiries")
     name = models.CharField(max_length=100)
-    phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=15, null=True, blank=True)
     email = models.CharField(max_length=50)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
