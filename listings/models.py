@@ -2,6 +2,7 @@ from django.db import models
 import uuid
 from accounts.models import Profile
 from multiselectfield import MultiSelectField
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Property(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
@@ -43,7 +44,7 @@ class PropertyImage(models.Model):
 class Review(models.Model):
         property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='reviews')
         reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='reviews')
-        rating = models.IntegerField()
+        rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5))
         comment = models.TextField()
         created_at = models.DateTimeField(auto_now_add=True)
         
