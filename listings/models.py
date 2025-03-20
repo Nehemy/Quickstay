@@ -33,3 +33,19 @@ class Property(models.Model):
     def __str__(self):
         return f"{self.title} - {self.id}"
     
+class PropertyImage(models.Model):
+        property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="images")
+        cover_image = models.ImageField(upload_to='property_cover_images/', null=True, blank=True)
+        
+        def __str__(self):
+            return f"Cover image for {self.property.title} - {self.property.id}"
+    
+class Review(models.Model):
+        property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='reviews')
+        reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='reviews')
+        rating = models.IntegerField()
+        comment = models.TextField()
+        created_at = models.DateTimeField(auto_now_add=True)
+        
+        def __str__(self):
+            return f"Review by {self.reviewer.user.username} on {self.property.title}"
