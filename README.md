@@ -67,4 +67,27 @@ python manage.py runserver
 
 ## Project Structure
 
-quickstay/ # Main project folder ├── accounts/ # Accounts app (user authentication and profile) │ ├── migrations/ # Database migrations for the accounts app │ ├── models.py # Models for user profiles and related logic │ ├── views.py # Views handling account-related endpoints │ ├── forms.py # Forms for registration and profile updates │ └── urls.py # URL routes specific to the accounts app ├── listings/ # Listings app (property listings, images, reviews, enquiries) │ ├── migrations/ # Database migrations for the listings app │ ├── models.py # Models for Property, PropertyImage, Review, Enquiry, etc. │ ├── views.py # Views handling property listing endpoints │ ├── serializers.py # (Optional) DRF serializers if using Django Rest Framework │ └── urls.py # URL routes specific to the listings app ├── quickstay/ # Django project configuration folder │ ├── init.py # Empty file that makes Python treat this directory as a package │ ├── settings.py # Global settings for the Django project │ ├── urls.py # Root URL configuration for the project │ ├── wsgi.py # WSGI configuration for deployment │ └── asgi.py # ASGI configuration for asynchronous support ├── media/ # Media files (uploaded images, etc.) ├── static/ # Static files (CSS, JS, images) ├── manage.py # Command-line utility for interacting with the Django project └── README.md # Project overview and documentation
+```plaintext
+quickstay/                  # Main project folder
+├── accounts/               # Accounts app (user authentication and profile)
+│   ├── migrations/         # Database migrations for the accounts app
+│   ├── models.py           # Models for user profiles and related logic
+│   ├── views.py            # Views handling account-related endpoints
+│   ├── forms.py            # Forms for registration and profile updates
+│   └── urls.py             # URL routes specific to the accounts app
+├── listings/               # Listings app (property listings, images, reviews, enquiries)
+│   ├── migrations/         # Database migrations for the listings app
+│   ├── models.py           # Models for Property, PropertyImage, Review, Enquiry, etc.
+│   ├── views.py            # Views handling property listing endpoints
+│   ├── serializers.py      # (Optional) DRF serializers if using Django Rest Framework
+│   └── urls.py             # URL routes specific to the listings app
+├── quickstay/              # Django project configuration folder
+│   ├── __init__.py         # Makes this directory a Python package
+│   ├── settings.py         # Global settings for the Django project
+│   ├── urls.py             # Root URL configuration for the project
+│   ├── wsgi.py             # WSGI configuration for deployment
+│   └── asgi.py             # ASGI configuration for asynchronous support
+├── media/                  # Media files (uploaded images, etc.)
+├── static/                 # Static files (CSS, JS, images)
+├── manage.py               # Command-line utility for interacting with the Django project
+└── README.md               # Project overview and documentation
