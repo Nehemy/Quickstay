@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>Quick Stay</title>{% endblock %}
+</head>
+<body>
+<h1>QuickStay</h1>
+<a href="{% url 'home' %}">Home</a>
+<a href="{% url 'property-create' %}">Create New Property</a>
+<br>
+
+{% block content %}
+    
+{% endblock %}
+    
+</body>
+</html>

@@ -12,3 +12,6 @@ class Profile(models.Model):
     ]
     user_type = models.CharField(choices = USER_TYPES, max_length=50, blank=True, null=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.user_type}"

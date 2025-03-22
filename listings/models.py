@@ -6,7 +6,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Property(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
-    host = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="properties")
+    host = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="properties", editable=False)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     address = models.CharField(max_length=255, null=True)

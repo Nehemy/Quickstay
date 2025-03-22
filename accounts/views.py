@@ -3,7 +3,7 @@ from django.views.generic import DetailView, ListView, CreateView, UpdateView, D
 from .models import *
 
 def index(request):
-    HttpResponse("Test")
+    return render(request, 'index.html')
 
 # class ProfileDetailView(DetailView):
 #     model = Profile
