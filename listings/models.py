@@ -6,11 +6,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Property(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
-    host = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="properties", editable=False)
-    title = models.CharField(max_length=200)
+    # host = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="properties")
     description = models.TextField(null=True, blank=True)
     address = models.CharField(max_length=255, null=True)
-    city = models.CharField(max_length=100, null=True, blank=True)
+    city = models.CharField(max_length=100, null=True)
     state = models.CharField(max_length=100, null=True, blank=True)
     country = models.CharField(max_length=100, null=True, blank=True)
     price = models.DecimalField(max_digits=11, decimal_places=2)
@@ -32,7 +31,7 @@ class Property(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return f"{self.title} - {self.id}"
+        return f"{self.property_type} in {self.city} - {self.id}"
     
 class PropertyImage(models.Model):
         property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="images")

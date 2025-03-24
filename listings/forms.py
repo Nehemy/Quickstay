@@ -4,4 +4,4 @@ from .models import *
 class PropertyForm(ModelForm):
     class Meta:
         model = Property
-        fields = '__all__'
+        fields = ['description', 'address', 'city', 'state', 'country', 'price', 'property_type', 'amenities', 'cover_image']

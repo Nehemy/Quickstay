@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Add New Property</h1>
 
-<form action="POST">
+<form method="POST">
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit" value="Create">

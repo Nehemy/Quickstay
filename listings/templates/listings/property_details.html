@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}<title>Property</title>{% endblock %}
+
+{% block content %}
+<br>
+<strong>{{ property.property_type|title }} in {{ property.city }}, {{ property.country }}</strong>
+<br>
+{{ property.address }}
+<br>
+{{ property.description }}
+
+{% endblock %}
