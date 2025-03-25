@@ -16,7 +16,7 @@ def createProperty(request):
     form = PropertyForm()
     
     if request.method == 'POST':
-        form = PropertyForm(request.POST)
+        form = PropertyForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('properties')
@@ -30,7 +30,7 @@ def updateProperty(request, pk):
     form = PropertyForm(instance=property)
     
     if request.method == 'POST':
-        form = PropertyForm(request.POST, instance=property)
+        form = PropertyForm(request.POST, request.FILES, instance=property)
         if form.is_valid():
             form.save()
             return redirect('properties')
