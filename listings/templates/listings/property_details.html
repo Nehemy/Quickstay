@@ -5,8 +5,15 @@
 <br>
 <img style="max-width: 400px;"  src="{{ property.cover_image.url }}">
 <strong>{{ property.property_type|title }} in {{ property.city }}, {{ property.country }}</strong>
+<hr>
+<p>$ {{ property.price }}</p>
+<hr>
+{% if property.host%}
+<p>Host: {{ property.host.name }}</p>
+<hr>
+{% endif %}
 <br>
-{{ property.address }}
+<p>{{ property.address }}</p>
 <br>
 {{ property.description }}
 
