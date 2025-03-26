@@ -26,7 +26,7 @@ class Property(models.Model):
         ('wifi', 'WiFi'),('ac', 'Air Conditioning'),('heating', 'Heating'),('kitchen', 'Kitchen'),('parking', 'Parking'),('washer', 'Washer'),('dryer', 'Dryer'),('tv', 'TV'),('pool', 'Pool'),('gym', 'Gym'),('breakfast', 'Breakfast Included'),('pets', 'Pets Allowed'),('smoking', 'Smoking Allowed'),('elevator', 'Elevator'),('wheelchair', 'Wheelchair Accessible'),('hottub', 'Hot Tub'),('sauna', 'Sauna'),('bbq', 'BBQ Grill'),('fireplace', 'Fireplace'),('balcony', 'Balcony'),('garden', 'Garden'),('private_entrance', 'Private Entrance'),('cable_tv', 'Cable TV'),('coffee_maker', 'Coffee Maker'),('iron', 'Iron'),('hair_dryer', 'Hair Dryer'),('luggage_drop', 'Luggage Drop Off'),('essentials', 'Essentials (towels, bed sheets, soap, and toilet paper)'),('workspace', 'Laptop Friendly Workspace'),('self_check_in', 'Self Check-in'),('family_friendly', 'Family/Kid Friendly'),
         ]
     amenities = MultiSelectField(choices=AMENITY_CHOICES, max_length=500, blank=True, null=True)
-    cover_image = models.ImageField(null=True, blank=True, default="static/images/default.png")
+    cover_image = models.ImageField(null=True, blank=True, upload_to='cover_images/', default="images/default.png")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

@@ -2,10 +2,6 @@ from django.shortcuts import render, HttpResponse
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from .models import *
 
-def index(request):
-    return render(request, 'index.html')
+def profile(request):
+    return render(request, 'accounts/profile.html')
 
-# class ProfileDetailView(DetailView):
-#     model = Profile
-    
-    

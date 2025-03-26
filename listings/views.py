@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 
+def index(request):
+    return render(request, 'index.html')
+
 def properties(request):
     properties = Property.objects.all()
     context = {'properties' : properties}
