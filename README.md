@@ -74,6 +74,7 @@ quickstay/
 │   │   └── accounts/
 │   │       ├── account_form.html
 │   │       └── profile.html
+│   │       └── public_profile.html
 │   ├── admin.py
 │   ├── apps.py
 │   ├── forms.py
@@ -86,8 +87,11 @@ quickstay/
 │   ├── templates/
 │   │   └── listings/
 │   │       ├── confirm_delete.html
-│   │       ├── property_detail.html
+│   │       ├── host_enquiries.html
+│   │       ├── property_details.html
+│   │       └── properties.html
 │   │       └── property_form.html
+│   │       └── property.html
 │   ├── admin.py
 │   ├── apps.py
 │   ├── forms.py
@@ -106,6 +110,10 @@ quickstay/
 │   └── css/
 │       └── styles.css
 ├── templates/
+│   │   └── registration/
+│   │       ├── logged_out.html
+│   │       ├── login.html
+│   │       ├── signup.html
 │   ├── base.html
 │   └── home.html
 ├── db.sqlite3
