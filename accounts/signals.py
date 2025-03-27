@@ -9,7 +9,7 @@ from django.dispatch import receiver
 def createProfile(sender, instance, created, **kwargs):
     if created:
         user = instance
-        profile = Profile.objects.create(user=user, username=user.username, email=user.email)
+        profile = Profile.objects.create(user=user, username=user.username, email=user.email, name=user.first_name)
         
 @receiver(post_delete, sender = Profile)
 def profileDeleted(sender, instance, **kwargs):

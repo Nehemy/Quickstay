@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}<title>Register</title>{% endblock %}
+
+{% block content %}
+
+
+<h1>Register</h1>
+<hr>
+
+{% if form.errors %}
+<p>You have entered an incorrect username or password.</p>
+{% endif %}
+
+{% if next %}
+{% if not user.is_authenticated %}
+<h1>Please login to view that page:</h1>
+{% else %}
+<h1>Please login:</h1>
+{% endif %}
+{% endif %}
+
+<form action="{% url 'register' %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Sign up">
+    <input type="hidden" name="next" value={{next}}>
+</form>
+<p>
+    <a href="{% url 'login' %}">Have an account? Login here.</a>
+</p>
+
+{% endblock %}
