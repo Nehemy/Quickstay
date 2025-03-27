@@ -13,6 +13,14 @@
 <hr>
 <p>{{ property.description }}</p>
 
+{% if property.images.all %}
+<hr>
+  <h3>Gallery</h3>
+    {% for image in property.images.all %}
+      <img src="{{ image.image.url }}" style="max-width:150px;">
+    {% endfor %}
+{% endif %}
+
 <hr>
   <h3>Enquire about this property</h3>
   

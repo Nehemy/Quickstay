@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib import messages
 from .models import *
 from .forms import *
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 
@@ -37,37 +38,48 @@ def propertyDetails(request, pk):
     }
     return render(request, 'listings/property_details.html', context)
 
+@login_required
 def createProperty(request):
-    form = PropertyForm()
-    
-    if request.method == 'POST':
+    if request.method == "POST":
         form = PropertyForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('properties')
-        
-    context = {'form':form}
+            property_obj = form.save(commit=False)
+            property_obj.host = request.user.profile
+            property_obj.save()
+            
+            images = request.FILES.getlist('images')
+            for image in images:
+                PropertyImage.objects.create(property=property_obj, image=image)
+            
+            return redirect('account')
+    else:
+        form = PropertyForm()
+    context = {'form': form}
     return render(request, 'listings/property_form.html', context)
 
-
+@login_required
 def updateProperty(request, pk):
-    property = Property.objects.get(id=pk)
-    form = PropertyForm(instance=property)
-    
-    if request.method == 'POST':
-        form = PropertyForm(request.POST, request.FILES, instance=property)
+    property_obj = get_object_or_404(Property, id=pk)
+    if request.method == "POST":
+        form = PropertyForm(request.POST, request.FILES, instance=property_obj)
         if form.is_valid():
             form.save()
-            return redirect('properties')
-        
-    context = {'form':form}
+            
+            images = request.FILES.getlist('images')
+            for image in images:
+                PropertyImage.objects.create(property=property_obj, image=image)
+                
+            return redirect('account')
+    else:
+        form = PropertyForm(instance=property_obj)
+    context = {'form': form}
     return render(request, 'listings/property_form.html', context)
 
 def deleteProperty(request, pk):
     property = Property.objects.get(id=pk)
     if request.method =='POST':
         property.delete()
-        return redirect('properties')
+        return redirect('account')
     
     context = {'object': property}
     return render(request, 'listings/confirm_delete.html', context)

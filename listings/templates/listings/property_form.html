@@ -1,12 +1,16 @@
 {% extends "base.html" %}
-{% block title %}<title>Add New Property</title>{% endblock %}
+{% block title %}<title>{% if form.instance.pk %}Update{% else %}Create{% endif %} Property</title>{% endblock %}
 
 {% block content %}
-<h1>Add New Property</h1>
-
+<h1>{% if form.instance.pk %}Update{% else %}Create{% endif %} Property</h1>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Create">
+    {{ form.as_p }}
+
+    <h3>Upload Additional Property Images</h3>
+    <input type="file" name="images" multiple>
+    <br>
+    <br>
+    <button type="submit">{% if form.instance.pk %}Update Property{% else %}Create Property{% endif %}</button>
 </form>
 {% endblock %}
