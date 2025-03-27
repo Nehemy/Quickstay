@@ -2,16 +2,22 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+USER_TYPE_CHOICES = [
+    ('', '--- Select a user type ---'),
+    ('host', 'Host'),
+    ('renter', 'Looking to rent'),
+]
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, required=True, label="Select Account Type")
     
     class Meta:
         model = User
-        fields = ("username", "first_name", "email", "password1", "password2")
+        fields = ("username", "first_name", "user_type", "email", "password1", "password2")
         labels = {
             "username": "Username",
-            'first_name': 'Name',
+            'first_name': "Name",
             "email": "Email Address",
             "password1": "Enter Your Password",
             "password2": "Confirm Your Password",
@@ -23,4 +29,6 @@ class CustomUserCreationForm(UserCreationForm):
         user.email = self.cleaned_data["email"]
         if commit:
             user.save()
+            user.profile.user_type = self.cleaned_data["user_type"]
+            user.profile.save()
         return user
