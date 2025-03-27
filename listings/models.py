@@ -39,17 +39,6 @@ class PropertyImage(models.Model):
         
         def __str__(self):
             return f"Cover image for {self.property.title} - {self.property.id}"
-    
-class Review(models.Model):
-        id = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
-        property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='reviews')
-        reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='reviews')
-        rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
-        comment = models.TextField(null=True, blank=True)
-        created_at = models.DateTimeField(auto_now_add=True)
-        
-        def __str__(self):
-            return f"{self.rating} star review by {self.reviewer.user.username} on {self.property.title}"
 
 class Enquiry(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name="enquiries")

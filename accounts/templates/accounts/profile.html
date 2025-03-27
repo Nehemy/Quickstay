@@ -23,6 +23,8 @@
             </a>
             &nbsp;|&nbsp;
             <a href="{% url 'update-property' property.pk %}">Edit Property</a>
+            &nbsp;|&nbsp;
+            <a href="{% url 'delete-property' property.pk %}">Delete Property</a>
           </li>
         {% endfor %}
       </ul>
