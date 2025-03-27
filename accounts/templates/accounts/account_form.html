@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}<title>Update Your Account</title>{% endblock %}
+
+{% block content %}
+<div class="account-update-container">
+    <h1>Update Your Account</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

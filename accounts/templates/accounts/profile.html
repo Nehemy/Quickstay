@@ -1,8 +1,35 @@
 {% extends "base.html" %}
-{% block title %}<title>Profile</title>{% endblock %}
+{% block title %}<title>Your Profile</title>{% endblock %}
 
 {% block content %}
-
-<h1>Profile Page</h1>
-{{ profile.name }}
+<div class="profile-container">
+    <h1>{{ profile.name }}</h1>
+    
+    {% if profile.profile_picture %}
+      <img src="{{ profile.profile_picture.url }}" alt="{{ profile.name }}" style="max-width:200px;">
+    {% endif %}
+    
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+    <p><strong>Account Type:</strong> {{ profile.user_type|title }}</p>
+    
+    {% if profile.user_type == "host" and properties %}
+      <h2>Your Properties</h2>
+      <ul>
+        {% for property in properties %}
+          <li>
+            <a href="{% url 'property-details' property.pk %}">
+              {{ property.property_type|title }} in {{ property.city }}, {{ property.country }}
+            </a>
+            &nbsp;|&nbsp;
+            <a href="{% url 'update-property' property.pk %}">Edit Property</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    
+    <p>
+      <a href="{% url 'account-update' %}">Edit Profile</a>
+    </p>
+</div>
 {% endblock %}

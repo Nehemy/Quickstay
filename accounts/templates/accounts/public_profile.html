@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}<title>Profile - {{ profile.name }}</title>{% endblock %}
+
+{% block content %}
+  <h1>{{ profile.name }}</h1>
+  <p>Bio: {{ profile.bio }}</p>
+  {% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" alt="{{ profile.name }}" style="max-width:200px;">
+  {% endif %}
+  
+  {% if profile.user_type == "host" %}
+  <p>{{ profile.user_type|title }}</p>
+    <h2>Properties</h2>
+    {% if properties %}
+      <ul>
+        {% for property in properties %}
+          <li>
+            <a href="{% url 'property-details' property.pk %}">
+              {{ property.property_type|title }} in {{ property.city }}, {{ property.country }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No properties available.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}
