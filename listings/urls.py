@@ -8,4 +8,5 @@ urlpatterns = [
     path('create-property/', createProperty, name='property-create'),
     path('update-property/<str:pk>/', updateProperty, name='update-property'),
     path('delete-property/<str:pk>/', deleteProperty, name='delete-property'),
+    path('account/enquiries/', HostEnquiryListView.as_view(), name='host-enquiries'),
 ]

@@ -3,19 +3,29 @@
 
 {% block content %}
 <br>
-<img style="max-width: 400px;"  src="{{ property.cover_image.url }}">
-<br>
-<strong>{{ property.property_type|title }} in {{ property.city }}, {{ property.country }}</strong>
-<hr>
-<p>$ {{ property.price }}</p>
-<hr>
+<h1>{{ property.property_type|title }} in {{ property.city }}, {{ property.country }}</h1>
+<p>{{ property.address }}</p>
+<img style="max-width: 400px;" src="{{ property.cover_image.url }}">
+<p><strong>Price:</strong> ${{ property.price }}</p>
 {% if property.host%}
 <p>Host: <a href="{% url 'public-profile' property.host.pk %}">{{ property.host.name }}</a></p>
-<hr>
 {% endif %}
-<br>
-<p>{{ property.address }}</p>
-<br>
-{{ property.description }}
+<hr>
+<p>{{ property.description }}</p>
+
+<hr>
+  <h3>Enquire about this property</h3>
+  
+  {% if user.is_authenticated %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ enquiry_form.as_p }}
+        <button type="submit">Submit Enquiry</button>
+    </form>
+  {% else %}
+    <p>You must be <a href="{% url 'login' %}?next={{ request.path }}">logged in</a> to submit an enquiry.</p>
+  {% endif %}
+
+
 
 {% endblock %}

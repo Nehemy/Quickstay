@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}<title>Your Enquiries</title>{% endblock %}
+
+{% block content %}
+  <h1>Your Enquiries</h1>
+  {% if enquiries %}
+    <ul>
+      {% for enquiry in enquiries %}
+        <li>
+          <p>
+            <strong>Property:</strong>
+            <a href="{% url 'property-details' enquiry.property.pk %}">
+              {{ enquiry.property.property_type|title }} in {{ enquiry.property.city }}, {{ enquiry.property.country }}
+            </a>
+          </p>
+          <p><strong>Enquiry from:</strong> {{ enquiry.name }}</p>
+          <p><strong>Message:</strong> {{ enquiry.message }}</p>
+          <p><strong>Email:</strong> {{ enquiry.email }}</p>
+          <p><strong>Submitted:</strong> {{ enquiry.created_at|date:"M d, Y H:i" }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No enquiries found.</p>
+  {% endif %}
+{% endblock %}
