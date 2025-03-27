@@ -11,14 +11,16 @@
 <h1>QuickStay</h1>
 <a href="{% url 'home' %}">Home</a>
 <a href="{% url 'properties' %}">Properties</a>
-{% if user.is_authenticated %}
+{% if user.is_authenticated%}
+{% if user.profile.user_type == 'host'%}
 <a href="{% url 'property-create' %}">Create New Property</a>
+{% endif %}
 <a href="{% url 'account' %}">Account</a>
 <form action="{% url 'logout' %}" method="POST">
     {% csrf_token %}
     <button type="submit">Logout</button>
 </form>
-<p>Welcome {{user.username}}</p>
+<p>Welcome {{user.profile.name}}</p>
 {% else %}
 <a href="{% url 'login' %}">Login</a>
 <a href="{% url 'register' %}">Create an account</a>

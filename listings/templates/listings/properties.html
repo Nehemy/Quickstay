@@ -8,8 +8,6 @@
 {% for property in properties %}
 <a href="{% url 'property-details' property.pk %}">
     <strong>{{ property.property_type|title }} in {{ property.city }}, {{ property.country }}</strong></a>
-    <a href="{% url 'update-property' property.id %}">Edit</a>
-    <a href="{% url 'delete-property' property.id %}">Delete</a>
 <br>
 {% endfor %}
 {% endblock %}
