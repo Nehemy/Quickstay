@@ -23,6 +23,16 @@ class CustomUserCreationForm(UserCreationForm):
             "password2": "Confirm Your Password",
         }
     
+    def clean_first_name(self):
+        name = self.cleaned_data.get('first_name')
+        if not name.isalpha():
+            raise forms.ValidationError("Name must contain only alphabetic characters.")
+        return name
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data
+    
     def save(self, commit=True):
         user = super().save(commit=False)
         user.username = user.username.lower()

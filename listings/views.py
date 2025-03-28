@@ -16,7 +16,7 @@ def properties(request):
     return render(request, 'listings/properties.html', context)
 
 def propertyDetails(request, pk):
-    property_obj = Property.objects.get(id=pk)
+    property_obj = get_object_or_404(Property, id=pk)
     
     if request.method == "POST":
         if not request.user.is_authenticated:
