@@ -4,7 +4,9 @@
 {% block content %}
 <br>
 <h1>{{ property.property_type|title }} in {{ property.city }}, {{ property.country }}</h1>
-<p>{{ property.address }}</p>
+<p>Address: {{ property.address }}</p>
+<p>{{ property.city }} | {{ property.state }} | {{ property.country }}</p>
+<p>Property Type: {{ property.property_type }}</p>
 <img style="max-width: 400px;" src="{{ property.cover_image.url }}">
 <p><strong>Price:</strong> ${{ property.price }}</p>
 {% if property.host%}
@@ -12,6 +14,12 @@
 {% endif %}
 <hr>
 <p>{{ property.description }}</p>
+{% if  property.amenities %}
+<h3>Amenities</h3>
+{% for ammenity in  property.amenities %}
+<p>{{ ammenity | title}} </p>
+{% endfor %}
+{% endif %}
 
 {% if property.images.all %}
 <hr>
