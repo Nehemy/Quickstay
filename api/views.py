@@ -2,7 +2,8 @@ from rest_framework import generics, viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from django.contrib.auth.models import User
-from listings.models import Property
+from accounts.models import Profile
+from listings.models import *
 from .serializers import *
 
 
@@ -42,3 +43,28 @@ class PropertyViewSet(viewsets.ModelViewSet):
         if instance.host != self.request.user.profile:
             raise PermissionDenied("You are not allowed to delete this property.")
         instance.delete()
+
+class ProfileViewSet(viewsets.ModelViewSet):
+
+    serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_queryset(self):
+        return Profile.objects.filter(user=self.request.user)
+    
+    def get_object(self):
+        return self.request.user.profile
+
+class EnquiryViewSet(viewsets.ModelViewSet):
+    
+    queryset = Enquiry.objects.all()
+    serializer_class = EnquirySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    
+    def perform_create(self, serializer):
+        serializer.save()
+
+class PublicProfileAPIView(generics.RetrieveAPIView):
+    queryset = Profile.objects.filter(user_type='host')
+    serializer_class = PublicProfileSerializer
+    permission_classes = [permissions.AllowAny]
