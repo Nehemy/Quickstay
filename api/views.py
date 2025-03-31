@@ -31,3 +31,14 @@ class PropertyViewSet(viewsets.ModelViewSet):
         if self.request.user.profile.user_type != 'host':
             raise PermissionDenied("Only hosts can create properties.")
         serializer.save(host=self.request.user.profile)
+    
+    def perform_update(self, serializer):
+        property_obj = self.get_object()
+        if property_obj.host != self.request.user.profile:
+            raise PermissionDenied("You are not allowed to update this property.")
+        serializer.save()
+    
+    def perform_destroy(self, instance):
+        if instance.host != self.request.user.profile:
+            raise PermissionDenied("You are not allowed to delete this property.")
+        instance.delete()
