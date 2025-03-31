@@ -4,10 +4,11 @@ from rest_framework.authtoken.views import obtain_auth_token
 from .views import *
 
 router = DefaultRouter()
+router.register(r'properties', PropertyViewSet, basename='properties')
 
 urlpatterns = [
-    path('register/', UserRegistrationAPIView.as_view(), name='api-register'),
     path('', include(router.urls)),
+    path('register/', UserRegistrationAPIView.as_view(), name='api-register'),
     path('login/', obtain_auth_token, name='api-login'),
     
 ]

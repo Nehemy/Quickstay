@@ -1,8 +1,7 @@
 from rest_framework import serializers
-from listings.models import Property
+from listings.models import *
 from accounts.models import Profile
 from django.contrib.auth.models import User
-from accounts.models import Profile
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     name = serializers.CharField()
@@ -40,8 +39,43 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             user_type=user_type
         )
         return user
+class PropertyImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PropertyImage
+        fields = ['id', 'image']
+        
 
 class PropertySerializer(serializers.ModelSerializer):
+    
+    class EnquirySerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Enquiry
+            fields = '__all__'
+        
+
+    images = PropertyImageSerializer(many=True, read_only=True)
+    enquiries = serializers.SerializerMethodField()
+                                     
     class Meta:
         model = Property
         fields = '__all__'
+    
+    def get_enquiries(self, obj):
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            if obj.host == request.user.profile:
+                serializer = self.EnquirySerializer(obj.enquiries.all(), many=True)
+                return serializer.data
+        return []
+        
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('id', 'username', 'name', 'email', 'bio', 'profile_picture', 'user_type', 'date_joined', 'updated_at')
+
+class UserSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(read_only=True)
+    
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'email', 'profile')
