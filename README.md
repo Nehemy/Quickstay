@@ -124,9 +124,9 @@ quickstay/
 ├── db.sqlite3
 ├── manage.py
 └── README.md
+```
 
-
-# API Endpoints
+## API Endpoints
 
 ## 1. User Registration
 **Endpoint:**  
@@ -145,6 +145,7 @@ Register a new user by providing a username, name (mapped to the User’s first_
   "password2": "SecurePassword1",
   "user_type": "host"
 }
+```
 
 **Expected Response:**
 ```json
