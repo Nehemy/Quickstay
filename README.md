@@ -152,6 +152,7 @@ Register a new user by providing a username, name (mapped to the User’s first_
 {
   "message": "User successfully registered."
 }
+```
 
 ## 2. User Login
 **Endpoint:**  
@@ -166,16 +167,18 @@ Authenticate the user and return an authentication token.
   "username": "chinedu123",
   "password": "SecurePassword1"
 }
-
+```
 
 **Demo Expected Response:**
 ```json
 {
   "token": "11111111000aethnd12345678925y2f01234567"
 }
+```
 
+Use the token in the Authorization header for all authenticated endpoints.
+Example:
 
-Use the token in the Authorization header for all authenticated endpoints
 Authorization: Token 11111111000aethnd12345678925y2f01234567
 
 ## 3. Profile (Logged-in User)
@@ -202,9 +205,12 @@ Authorization: Token 11111111000aethnd12345678925y2f01234567
   "date_joined": "2025-03-31T14:30:00Z",
   "updated_at": "2025-03-31T14:30:00Z"
 }
+```
 
 ## 4. Properties
+
 **a. List Properties**  
+
 **Endpoint:**  
 `GET /api/properties/`
 
@@ -230,9 +236,10 @@ Retrieve a list of all properties.
     "enquiries": []
   }
 ]
-
+```
 
 **b. Retrieve Single Property**  
+
 **Endpoint:**  
 `GET /api/properties/<property_id>/`
 
@@ -240,6 +247,7 @@ Retrieve a list of all properties.
 Retrieve detailed information for a specific property, including nested images and enquiries (if the authenticated user is the property owner).
 
 **c. Create Property (Host Only)**  
+
 **Endpoint:**  
 `POST /api/properties/`
 
@@ -259,8 +267,10 @@ Create a new property (only hosts can create properties).
   "amenities": ["wifi", "ac", "kitchen"],
   "cover_image": "http://example.com/media/cover_images/lagos.jpg"
 }
+```
 
 **d. Update/Delete Property**  
+
 **Endpoint:**  
 `PUT/PATCH /api/properties/<property_id>/`
 `DELETE /api/properties/<property_id>/`
@@ -269,6 +279,7 @@ Create a new property (only hosts can create properties).
 Update or delete a property (only allowed if the authenticated user is the property owner).
 
 ## 5. Enquiries
+
 **Endpoint:**  
 `GET, POST /api/enquiries/`
 
@@ -285,6 +296,7 @@ Authenticated users can create enquiries and view them.
   "email": "emeka@example.com",
   "message": "I would like more details about your property."
 }
+```
 
 **Demo Expected Response**
 ```json
@@ -297,9 +309,10 @@ Authenticated users can create enquiries and view them.
   "message": "I would like more details about your property.",
   "created_at": "2025-03-31T15:00:00Z"
 }
-
+```
 
 ## 6. Public Profile
+
 **Endpoint:**  
 `GET /api/public-profile/<profile_id>/`
 
@@ -331,3 +344,4 @@ Retrieve the public profile of a host, showing non-sensitive data (name, bio, pr
     }
   ]
 }
+```
