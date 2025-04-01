@@ -200,7 +200,7 @@ Authorization: Token 11111111000aethnd12345678925y2f01234567
   "name": "Chinedu",
   "email": "chinedu@example.com",
   "bio": "",
-  "profile_picture": "/media/profile_images/default.png",
+  "profile_picture": "/images/profile_images/default.png",
   "user_type": "host",
   "date_joined": "2025-03-31T14:30:00Z",
   "updated_at": "2025-03-31T14:30:00Z"
@@ -231,7 +231,7 @@ Retrieve a list of all properties.
     "price": "1500000.00",
     "property_type": "apartment",
     "amenities": ["wifi", "ac", "kitchen"],
-    "cover_image": "http://example.com/media/cover_images/lagos.jpg",
+    "cover_image": "/images/cover_images/lagos.jpg",
     "images": [],
     "enquiries": []
   }
@@ -265,7 +265,7 @@ Create a new property (only hosts can create properties).
   "price": "1500000.00",
   "property_type": "apartment",
   "amenities": ["wifi", "ac", "kitchen"],
-  "cover_image": "http://example.com/media/cover_images/lagos.jpg"
+  "cover_image": "/images/cover_images/lagos.jpg"
 }
 ```
 
@@ -325,7 +325,7 @@ Retrieve the public profile of a host, showing non-sensitive data (name, bio, pr
 {
   "name": "Chinedu",
   "bio": "",
-  "profile_picture": "/media/profile_images/default.png",
+  "profile_picture": "/images/profile_images/default.png",
   "user_type": "host",
   "properties": [
     {
@@ -338,7 +338,7 @@ Retrieve the public profile of a host, showing non-sensitive data (name, bio, pr
       "price": "1500000.00",
       "property_type": "apartment",
       "amenities": ["wifi", "ac", "kitchen"],
-      "cover_image": "http://example.com/media/cover_images/lagos.jpg",
+      "cover_image": "/images/cover_images/lagos.jpg",
       "images": [],
       "enquiries": []
     }
